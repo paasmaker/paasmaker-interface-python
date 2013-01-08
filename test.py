@@ -114,6 +114,7 @@ class PaasmakerInterfaceTest(unittest.TestCase):
 		self.assertEquals(interface.get_workspace_stub(), "test")
 		self.assertEquals(len(interface.get_workspace_tags()), 0)
 		self.assertEquals(len(interface.get_node_tags()), 0)
+		self.assertEquals(len(interface.get_all_services()), 1)
 
 		service = interface.get_service('parameters')
 		self.assertTrue(service.has_key('foo'))

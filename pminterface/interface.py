@@ -116,6 +116,12 @@ class PaasmakerInterface(object):
 		else:
 			raise NameError("No such service %s." % name)
 
+	def get_all_services(self):
+		"""
+		Return a dict containing all services.
+		"""
+		return self._services
+
 	def is_on_paasmaker(self):
 		"""
 		Determine if this application is currently running on
