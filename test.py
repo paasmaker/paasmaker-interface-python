@@ -36,6 +36,8 @@ class PaasmakerInterfaceTest(unittest.TestCase):
 		interface = pminterface.PaasmakerInterface(['configs/noexist.yml', 'configs/test.yml'])
 		# And this should not raise an exception.
 
+		self.assertEquals(interface.get_port(), 9002)
+
 	def test_json_config(self):
 		interface = pminterface.PaasmakerInterface(['configs/test.json'])
 
@@ -83,6 +85,7 @@ class PaasmakerInterfaceTest(unittest.TestCase):
 
 		os.environ['PM_SERVICES'] = json.dumps(services_raw)
 		os.environ['PM_METADATA'] = json.dumps(metadata_raw)
+		os.environ['PM_PORT'] = "42600"
 
 		interface = pminterface.PaasmakerInterface([])
 
@@ -99,6 +102,8 @@ class PaasmakerInterfaceTest(unittest.TestCase):
 
 		service = interface.get_service('variables')
 		self.assertTrue(service.has_key('one'))
+
+		self.assertEquals(interface.get_port(), 42600)
 
 		try:
 			interface.get_service('no-service')

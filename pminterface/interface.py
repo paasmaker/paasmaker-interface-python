@@ -35,6 +35,8 @@ class PaasmakerInterface(object):
 		self._is_on_paasmaker = False
 		self._variables = {}
 		self._services = {}
+		# It's over 9000.
+		self._port = 9001
 
 		self._parse_metadata()
 
@@ -47,6 +49,9 @@ class PaasmakerInterface(object):
 
 			self._services = json.loads(os.environ['PM_SERVICES'])
 			self._variables = json.loads(os.environ['PM_METADATA'])
+
+			if os.environ.has_key('PM_PORT'):
+				self._port = int(os.environ['PM_PORT'])
 		else:
 			# We're not on a node. Locate and load a configuration
 			# file.
@@ -93,6 +98,9 @@ class PaasmakerInterface(object):
 
 		if not data.has_key('application'):
 			raise PaasmakerInterfaceError("You must supply an application section in your configuration.")
+
+		if data.has_key('port'):
+			self._port = int(data['port'])
 
 		# Check for a few keys in the application section.
 		required_keys = ['name', 'version', 'workspace', 'workspace_stub']
@@ -167,3 +175,9 @@ class PaasmakerInterface(object):
 		per workspace.
 		"""
 		return self._variables['workspace']
+
+	def get_port(self):
+		"""
+		Fetch the TCP port that your application should be listening on.
+		"""
+		return self._port
