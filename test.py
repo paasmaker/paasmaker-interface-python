@@ -10,11 +10,11 @@ class PaasmakerInterfaceTest(unittest.TestCase):
 
 	def tearDown(self):
 		# Clean up any environment from the test.
-		if os.environ.has_key('PM_SERVICES'):
+		if 'PM_SERVICES' in os.environ:
 			del os.environ['PM_SERVICES']
-		if os.environ.has_key('PM_METADATA'):
+		if 'PM_METADATA' in os.environ:
 			del os.environ['PM_METADATA']
-		if os.environ.has_key('PM_PORT'):
+		if 'PM_PORT' in os.environ:
 			del os.environ['PM_PORT']
 
 		super(PaasmakerInterfaceTest, self).tearDown()
@@ -68,8 +68,8 @@ class PaasmakerInterfaceTest(unittest.TestCase):
 
 		workspace_tags = interface.get_workspace_tags()
 		node_tags = interface.get_node_tags()
-		self.assertTrue(workspace_tags.has_key('tag'))
-		self.assertTrue(node_tags.has_key('tag'))
+		self.assertTrue('tag' in workspace_tags)
+		self.assertTrue('tag' in node_tags)
 
 	def test_paasmaker_config(self):
 		# Generate and insert the configuration into the environment.
@@ -99,11 +99,11 @@ class PaasmakerInterfaceTest(unittest.TestCase):
 
 		workspace_tags = interface.get_workspace_tags()
 		node_tags = interface.get_node_tags()
-		self.assertTrue(workspace_tags.has_key('three'))
-		self.assertTrue(node_tags.has_key('one'))
+		self.assertTrue('three' in workspace_tags)
+		self.assertTrue('one' in node_tags)
 
 		service = interface.get_service('variables')
-		self.assertTrue(service.has_key('one'))
+		self.assertTrue('one' in service)
 
 		self.assertEquals(interface.get_port(), 42600)
 
@@ -124,7 +124,7 @@ class PaasmakerInterfaceTest(unittest.TestCase):
 		self.assertEquals(len(interface.get_all_services()), 1)
 
 		service = interface.get_service('parameters')
-		self.assertTrue(service.has_key('foo'))
+		self.assertTrue('foo' in service)
 
 		try:
 			interface.get_service('no-service')

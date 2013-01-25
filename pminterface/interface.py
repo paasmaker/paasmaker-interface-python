@@ -43,14 +43,14 @@ class PaasmakerInterface(object):
 	def _parse_metadata(self):
 		# Parse the metadata, or load the override configuration
 		# if we're not on a Paasmaker node.
-		if os.environ.has_key('PM_SERVICES') and os.environ.has_key('PM_METADATA'):
+		if 'PM_SERVICES' in os.environ and 'PM_METADATA' in os.environ:
 			# We're running on a Paasmaker node.
 			self._is_on_paasmaker = True
 
 			self._services = json.loads(os.environ['PM_SERVICES'])
 			self._variables = json.loads(os.environ['PM_METADATA'])
 
-			if os.environ.has_key('PM_PORT'):
+			if 'PM_PORT' in os.environ:
 				self._port = int(os.environ['PM_PORT'])
 		else:
 			# We're not on a node. Locate and load a configuration
@@ -87,25 +87,25 @@ class PaasmakerInterface(object):
 	def _store_configuration(self, filename, data):
 		# Check that any required sections are present, raising exceptions
 		# if not.
-		if not data.has_key('services'):
+		if 'services' not in data:
 			data['services'] = {}
 
-		if not data.has_key('workspace'):
+		if 'workspace' not in data:
 			data['workspace'] = {}
 
-		if not data.has_key('node'):
+		if 'node' not in data:
 			data['node'] = {}
 
-		if not data.has_key('application'):
+		if 'application' not in data:
 			raise PaasmakerInterfaceError("You must supply an application section in your configuration.")
 
-		if data.has_key('port'):
+		if 'port' in data:
 			self._port = int(data['port'])
 
 		# Check for a few keys in the application section.
 		required_keys = ['name', 'version', 'workspace', 'workspace_stub']
 		for key in required_keys:
-			if not data['application'].has_key(key):
+			if key not in data['application']:
 				raise PaasmakerInterfaceError("Missing required key %s in application configuration." % key)
 
 		# Store it all away.
@@ -119,7 +119,7 @@ class PaasmakerInterface(object):
 
 		:arg str name: The name of the service to fetch.
 		"""
-		if self._services.has_key(name):
+		if name in self._services:
 			return self._services[name]
 		else:
 			raise NameError("No such service %s." % name)
