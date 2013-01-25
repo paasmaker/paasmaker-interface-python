@@ -14,6 +14,8 @@ class PaasmakerInterfaceTest(unittest.TestCase):
 			del os.environ['PM_SERVICES']
 		if os.environ.has_key('PM_METADATA'):
 			del os.environ['PM_METADATA']
+		if os.environ.has_key('PM_PORT'):
+			del os.environ['PM_PORT']
 
 		super(PaasmakerInterfaceTest, self).tearDown()
 
