@@ -1,0 +1,5 @@
+include README
+include LICENSE
+include setup.py
+include pminterface/__init__.py
+include pminterface/interface.py
