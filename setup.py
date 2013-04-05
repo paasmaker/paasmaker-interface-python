@@ -23,5 +23,5 @@ setup(
 		"Topic :: Software Development :: Libraries :: Python Modules",
 		"Topic :: Internet :: WWW/HTTP :: Dynamic Content :: CGI Tools/Libraries",
 	],
-	long_description=open('README').read()
+	long_description=open('README.rst').read()
 )
