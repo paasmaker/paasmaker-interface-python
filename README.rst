@@ -16,7 +16,7 @@ constructor with a list of locations to look for override configuration
 files for development. You won't need override configuration files if you
 are using the development directory SCM in Paasmaker.
 
-.. code-block:: python
+.. sourcecode:: python
 
 	import pminterface
 
@@ -40,7 +40,7 @@ trying to read YAML files.
 
 Example YAML configuration file:
 
-.. code-block:: yaml
+.. sourcecode:: yaml
 
 	services:
 	  parameters:
@@ -54,7 +54,7 @@ Example YAML configuration file:
 
 Example JSON configuration file:
 
-.. code-block:: json
+.. sourcecode:: json
 
 	{
 		"services": {
